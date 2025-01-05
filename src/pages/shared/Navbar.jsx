@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext/AuthContext';
+import { BiLogOutCircle } from 'react-icons/bi';
 
 const Navbar = () => {
+  const { user, signOutUser } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    signOutUser();
+  };
   const links = (
     <>
       <li>
@@ -49,18 +56,26 @@ const Navbar = () => {
         </ul>
       </div>
       <div className="navbar-end">
-        <Link
-          to={'/register'}
-          className="px-3 py-2 rounded-md font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-        >
-          Register
-        </Link>
-        <Link
-          to={'/singIn'}
-          className="px-3 py-2 rounded-md font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ml-2"
-        >
-          Sign In
-        </Link>
+        {user ? (
+          <button onClick={handleSignOut} title="SignOut" type="button">
+            <BiLogOutCircle className="font-extrabold text-4xl text-red-800" />
+          </button>
+        ) : (
+          <div>
+            <Link
+              to={'/register'}
+              className="px-3 py-2 rounded-md font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+            >
+              Register
+            </Link>
+            <Link
+              to={'/signIn'}
+              className="px-3 py-2 rounded-md font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ml-2"
+            >
+              Sign In
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

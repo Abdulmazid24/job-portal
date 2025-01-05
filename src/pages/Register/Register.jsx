@@ -2,10 +2,12 @@
 
 import Lottie from 'lottie-react';
 import registerLottieData from '../../assets/lottie/register.json';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext/AuthContext';
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const handleRegister = e => {
     e.preventDefault();
@@ -20,9 +22,14 @@ const Register = () => {
       setError(
         'Invalid password. Password must contain at least 6 characters, one number, one uppercase, and one lowercase letter.'
       );
-    } else {
-      return;
     }
+    createUser(email, password)
+      .then(result => {
+        console.log(result.user);
+      })
+      .catch(error => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
@@ -103,8 +110,8 @@ const Register = () => {
           {error && <p className="font-thin text-red-700">{error}</p>}
           <p className="text-sm text-center">
             Already have an account?{' '}
-            <Link to="/login" className="text-indigo-600 underline">
-              Login
+            <Link to="/signIn" className="text-indigo-600 underline">
+              Sign In
             </Link>
           </p>
         </div>
