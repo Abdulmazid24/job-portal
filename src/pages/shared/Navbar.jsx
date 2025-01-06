@@ -2,12 +2,20 @@ import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext/AuthContext';
 import { BiLogOutCircle } from 'react-icons/bi';
+import Lottie from 'lottie-react';
+import jobLottieAnimation from '../../assets/lottie/job-portal.json';
 
 const Navbar = () => {
   const { user, signOutUser } = useContext(AuthContext);
 
   const handleSignOut = () => {
-    signOutUser();
+    signOutUser()
+      .then(() => {
+        console.log('successful sign out');
+      })
+      .catch(() => {
+        console.error('failed to sign out . stay here . dont go alone');
+      });
   };
   const links = (
     <>
@@ -20,7 +28,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-100 fixed top-0 left-0 z-50">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,8 +54,9 @@ const Navbar = () => {
             {links}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white">
-          JOB PORTAL
+        <a className="btn btn-ghost text-xl  ">
+          <Lottie className="w-16" animationData={jobLottieAnimation}></Lottie>
+          Job_Portal
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">

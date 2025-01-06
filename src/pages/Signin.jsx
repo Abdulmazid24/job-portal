@@ -33,7 +33,7 @@ const SignIn = () => {
   };
   return (
     <div className="min-h-screen  flex items-center justify-center p-4 border-2">
-      <div className="bg-white shadow-xl rounded-lg flex flex-col md:flex-row items-center w-full max-w-4xl">
+      <div className=" rounded-lg flex flex-col md:flex-row items-center w-full max-w-4xl">
         {/* Lottie Animation Section */}
         <div className="w-full md:w-1/2 p-4 flex justify-center">
           <Lottie animationData={loginLottieData}></Lottie>
