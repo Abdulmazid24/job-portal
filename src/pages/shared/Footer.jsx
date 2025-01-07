@@ -15,10 +15,13 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start space-y-8 md:space-y-0">
           {/* Logo and Tagline */}
           <div className="text-center md:text-left">
-            <Lottie
-              className="w-20"
-              animationData={jobLottieAnimation}
-            ></Lottie>
+            <p className="md:mx-auto">
+              {' '}
+              <Lottie
+                className="w-20 text-center md:text-left"
+                animationData={jobLottieAnimation}
+              ></Lottie>
+            </p>
             <h1 className="text-2xl font-bold mb-2">JobPortal</h1>
             <p className="text-sm">
               Your gateway to endless career opportunities.<br></br>Explore,
