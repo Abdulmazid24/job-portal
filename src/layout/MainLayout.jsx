@@ -11,7 +11,9 @@ const MainLayout = () => {
       <div className="my-10">
         <Outlet></Outlet>
       </div>
-      <Footer></Footer>
+      <div className="mx-auto">
+        <Footer></Footer>
+      </div>
     </div>
   );
 };

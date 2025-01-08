@@ -102,7 +102,7 @@ const Banner = () => {
               }}
               src="https://i.ibb.co/xhRgRmb/happy-team-4.jpg"
               alt="Smiling team photo 4"
-              className="max-w-sm shadow-2xl md:w-60 object-contain rounded-t-[40px] rounded-br-[40px] border-b-[6px] border-l-4 border-gray-950"
+              className="max-w-sm shadow-2xl  md:w-60 object-contain rounded-t-[40px] rounded-br-[40px] border-b-[6px] border-l-4 border-gray-950 "
             />
           </div>
         </div>
@@ -128,7 +128,7 @@ const Banner = () => {
                   '#808000',
                 ],
               }}
-              transition={{ duration: 1.5, repeat: Infinity }}
+              transition={{ duration: 10, repeat: Infinity, delay: 1 }}
             >
               Jobs
             </motion.span>{' '}
