@@ -3,11 +3,18 @@ import loginLottieData from '../assets/lottie/login.json';
 import Lottie from 'lottie-react';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthContext/AuthContext';
+import auth from '../firebase/firebase.config';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { toast, ToastContainer } from 'react-toastify';
 
 const SignIn = () => {
-  const { signInUser, signInWithGoogle } = useContext(AuthContext);
+  const { signInUser, setUser, signInWithGoogle } = useContext(AuthContext);
+  const location = useLocation();
+  console.log(location);
+  const navigate = useNavigate();
+  const from = location.state || '/';
   const handleSignIn = e => {
     e.preventDefault();
     const form = e.target;
@@ -17,18 +24,54 @@ const SignIn = () => {
     signInUser(email, password)
       .then(result => {
         console.log(result.user);
+        setUser(result.user);
+        navigate(from);
       })
       .catch(error => {
         console.log(error);
       });
   };
+  // const handleGoogleSignIn = () => {
+  //   signInWithGoogle()
+  //     .then(result => {
+  //       setUser(result.user);
+  //       console.log(result);
+  //       navigate(from);
+  //     })
+  //     .catch(error => {
+  //       console.log(error.message);
+  //     });
+  // };
+  const provider = new GoogleAuthProvider();
   const handleGoogleSignIn = () => {
-    signInWithGoogle()
+    signInWithPopup(auth, provider)
       .then(result => {
-        console.log(result);
+        const user = result.user;
+        setUser(user);
+        toast.success('Login successful!', {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
+        navigate(location?.state ? location.state : '/');
       })
       .catch(error => {
-        console.log(error.message);
+        setErrorMessage(error.message);
+        toast.error(`${errorMessage}`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: 'light',
+        });
       });
   };
   return (
@@ -101,7 +144,7 @@ const SignIn = () => {
               Sign Up
             </Link>
           </div>
-
+          <ToastContainer></ToastContainer>
           <div className="divider">OR</div>
 
           <div className="flex justify-center space-x-4">
