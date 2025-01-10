@@ -1,5 +1,9 @@
+import { Link } from 'react-router-dom';
+
 const LeatestJobsCard = ({ job }) => {
+  console.log(job);
   const {
+    _id,
     title,
     company_logo,
     // requirments,
@@ -70,9 +74,11 @@ const LeatestJobsCard = ({ job }) => {
         </div>
 
         {/* Apply Button */}
-        <button className="w-full bg-gradient-to-r from-red-200 via-violet-600 to-amber-600  text-white font-semibold py-1 px-5   rounded-md hover:scale-110 transition-transform duration-300">
-          Apply Now
-        </button>
+        <Link to={`/jobs/${_id}`}>
+          <button className="w-full bg-gradient-to-r from-red-200 via-violet-600 to-amber-600  text-white font-semibold py-1 px-5   rounded-md hover:scale-110 transition-transform duration-300">
+            Apply Now
+          </button>
+        </Link>
       </div>
     </div>
   );
