@@ -11,7 +11,7 @@ const LeatestJobsCard = ({ job }) => {
     location,
     applicationDeadline,
     // category,
-    salaryRange,
+    // salaryRange,
     // requirements,
     // responsibilities,
     company,
@@ -49,11 +49,6 @@ const LeatestJobsCard = ({ job }) => {
           </div>
           <div className="text-gray-800 text-sm">
             <span className="font-medium">💼 Type:</span> {jobType}
-          </div>
-          <div className="text-gray-800 text-sm">
-            <span className="font-medium">💰 Salary:</span>{' '}
-            {salaryRange.currency.toUpperCase()} {salaryRange.min} -{' '}
-            {salaryRange.max}
           </div>
         </div>
         <div className="flex justify-between">

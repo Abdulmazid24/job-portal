@@ -2,12 +2,13 @@ import { div } from 'framer-motion/client';
 import Lottie from 'lottie-react';
 import intervewLottie from '../../assets/lottie/job_intervew_1.json';
 import gradiantLottie from '../../assets/lottie/job_intervew_2.json';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 export default function JobDetails() {
   const jobDetailsData = useLoaderData();
   console.log(jobDetailsData);
   const {
+    _id,
     title,
     company_logo,
     description,
@@ -79,9 +80,11 @@ export default function JobDetails() {
           <strong>Contact HR:</strong> {hr_name} ({hr_email})
         </p>
 
-        <button className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-500 transition duration-300">
-          Apply Now
-        </button>
+        <Link to={`/jobApply/${_id}`}>
+          <button className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-500 transition duration-300">
+            Apply Now
+          </button>
+        </Link>
       </div>
     </div>
   );
